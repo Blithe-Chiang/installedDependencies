@@ -54,10 +54,10 @@ if __name__ == '__main__':
 
 
     # 把名字相同的jar包，版本放在一起
-    jar_with_version = {jar[0]: list() for jar in jars}
+    jar_with_version = {jar[0]: set() for jar in jars}
 
     for jar in jars:
-        jar_with_version[jar[0]].append(jar[1])
+        jar_with_version[jar[0]].add(jar[1])
 
 
     # 实现文字版本的工具
