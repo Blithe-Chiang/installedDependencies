@@ -6,9 +6,30 @@
 
 import os
 import re
-
 import sys
 
+
+import functools
+
+# 这个包用来版本比较的，需要自己手动安装，安装指令：pip install packaging
+from packaging import version as packaging_version
+
+# 比较版本：升序
+def version_compare(a,b):
+    a = packaging_version.parse(a)
+    b = packaging_version.parse(b)
+    if a < b:
+      return -1
+    elif a == b:
+      return 0
+    else:
+      return 1
+
+# 把集合形式的版本，变成升序的列表
+def convert_set_to_list(s):
+    l = list(s)
+    l.sort(key=functools.cmp_to_key(version_compare))
+    return l
 
 # 退出程序，带有状态码和信息
 def quit(code, msg):
@@ -67,7 +88,7 @@ if __name__ == '__main__':
         query_name = input('>>请输入要查找的jar包的相关字符串\n>>(输入.exit或者CTRL-C退出) - ')
         if query_name == '.exit':
             break
-        found = {k: v for k, v in jar_with_version.items() if query_name in k}
+        found = {k: convert_set_to_list(v) for k, v in jar_with_version.items() if query_name in k}
         print('='*30)
         if len(found) == 0:
             print('没有找到'+query_name+'相关的包')
