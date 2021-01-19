@@ -1,22 +1,23 @@
-import os
-import re
-
-import sys
-
 ## 简短的功能介绍
 # 这个脚本用来查询本地maven仓库中的包的信息
 
 # 使用方法
 # python 脚本名字 maven仓库路径? # maven仓库名字是可选的，可以直接修改下面这行代码。
 
-# maven仓库 目录
-# >>>> 修改这里的路径，这样的话，就不用通过命令行参数传入maven仓库了
-maven_dir = r'C:\Users\Blithe\.m2'  # 这里改成你的maven目录
+import os
+import re
+
+import sys
+
 
 # 退出程序，带有状态码和信息
 def quit(code, msg):
     print(msg)
     sys.exit(code)
+
+# maven仓库 目录
+# >>>> 修改这里的路径，这样的话，就不用通过命令行参数传入maven仓库了
+maven_dir = r'C:\Users\Blithe\.m2'  # 这里改成你的maven目录
 
 if __name__ == '__main__':
     # 通过命令行获取路径
